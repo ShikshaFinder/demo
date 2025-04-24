@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Health Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+        }
+
+        .bmi-categories {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .category-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Health Calculator</h1>
+
+        <form action="/calculate" method="post">
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" step="0.1" required
+                    th:value="${weight != null ? weight : ''}">
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height (m):</label>
+                <input type="number" id="height" name="height" step="0.01" required
+                    th:value="${height != null ? height : ''}">
+            </div>
+
+            <button type="submit">Calculate BMI</button>
+        </form>
+
+        <div class="result" th:if="${bmi != null}">
+            <h2>Your Results</h2>
+            <p>BMI: <span th:text="${bmi}"></span></p>
+            <p>Category: <span th:text="${category}"></span></p>
+        </div>
+
+        <div class="bmi-categories">
+            <h3>BMI Categories</h3>
+            <div class="category-item">Underweight: < 18.5</div>
+                    <div class="category-item">Normal weight: 18.5 - 24.9</div>
+                    <div class="category-item">Overweight: 25 - 29.9</div>
+                    <div class="category-item">Obesity: ≥ 30</div>
+            </div>
+        </div>
+</body>
+
+</html>
